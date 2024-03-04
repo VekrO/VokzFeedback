@@ -1,0 +1,22 @@
+<p-card *ngIf="!isSelected" header="Compartilhe sua experiência">
+    <div class="flex flex-column gap-2">
+        <p-button (onClick)="onSelect('elogio')" label="Elogiar" severity="success" icon="pi pi-thumbs-up" styleClass="w-full text-center p-button-raised"></p-button>
+        <p-button (onClick)="onSelect('ideia')" label="Dar uma ideia" severity="info" icon="pi pi-info-circle" styleClass="w-full text-center p-button-raised"></p-button>
+        <p-button (onClick)="onSelect('problema')" label="Reportar um problema" severity="danger" icon="pi pi-thumbs-down" styleClass="w-full text-center p-button-raised"></p-button>
+    </div>
+</p-card>
+
+<p-card *ngIf="isSelected" header="{{ selectedType }}">
+
+    <form [formGroup]="formulario">
+        <textarea rows="5" cols="30" pInputTextarea formControlName="descricao" class="w-full"></textarea>
+        <div class="flex justify-content-between w-full">
+            <p-button (onClick)="onSelect('voltar')" label="Voltar" severity="secondary" icon="pi pi-arrow-circle-left" styleClass="p-button-raised"></p-button>
+            <div class="flex gap-2">
+                <p-button icon="pi pi-camera" severity="info" [rounded]="true" [outlined]="true" styleClass="p-button-raised"></p-button>
+                <p-button (onClick)="onSelect('voltar')" label="Confirmar" severity="success" icon="pi pi-check" styleClass="p-button-raised"></p-button>
+            </div>
+        </div>
+    </form>
+
+</p-card>
