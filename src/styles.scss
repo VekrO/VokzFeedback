@@ -2,3 +2,30 @@
 @import "primeng/resources/themes/lara-light-blue/theme.css";
 @import "primeng/resources/primeng.css";
 @import "primeicons/primeicons.css";
+
+:root {
+    --bg-blue: #0ea5e9;
+    --bg-green: #22c55e;
+    --bg-red: #ef4444;
+}
+
+/* .p-card-content {
+    padding: 0;
+} */
+
+.bg-blue {
+    background-color: var(--bg-blue);
+}
+
+.bg-green {
+    background-color: var(--bg-green);
+}
+
+.bg-red {
+    background-color: var(--bg-red);
+}
+
+
+.text-white {
+    color: white;
+}

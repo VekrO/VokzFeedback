@@ -1,7 +1,7 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { Feedback } from "../../models/Feedback.model";
+import { Feedback } from "../models/Feedback.model";
 
 @Injectable()
 export class WidgetService {

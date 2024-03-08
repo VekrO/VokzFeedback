@@ -1,1 +1,66 @@
-<p>dashboard works!</p>
+<div class="grid p-fluid">
+
+    <p-card class="col-12">
+
+        <div class="flex justify-content-end align-items-center gap-3">
+
+            <div class="flex align-items-center justify-content-end">
+                <button pButton pRipple icon="pi pi-bell" class="p-button-text p-button-lg p-button-secondary"></button>
+                <button pButton pRipple icon="pi pi-comment" class="p-button-text p-button-lg p-button-secondary"></button>
+            </div>
+
+            <p-avatar image="assets/profile.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
+        
+        </div>
+
+    </p-card>
+
+    <p-card header="Feedback" subheader="Lista de todos os feedbacks" class="col-12 xl:col-6">
+
+        <p-card class="col-12 feedback-list p-0 m-0" styleClass="shadow-none">
+
+            <ng-template pTemplate="header">
+                <form [formGroup]="formulario" class="col-12">
+                    <p-dropdown [options]="filters" formControlName="filtering" placeholder="Filtrar por"></p-dropdown>
+                </form>
+            </ng-template>
+
+            <p-card class="col-12 flex flex-column">
+                <p-tag severity="info" icon="pi pi-info-circle" value="Ideia"></p-tag>
+                <p class="font-bold">Feedback:</p>
+                <textarea pInputTextarea [autoResize]="true" value="Primeiro teste do Vokz Feedback!"></textarea>
+                <p class="font-bold">Enviado por:</p>
+                <input type="text" pInputText value="cgrenancontato@gmail.com">
+            </p-card>
+            <p-card class="col-12 flex flex-column">
+                <p-tag severity="info" icon="pi pi-info-circle" value="Ideia"></p-tag>
+                <p class="font-bold">Feedback:</p>
+                <textarea pInputTextarea [autoResize]="true" value="Primeiro teste do Vokz Feedback!"></textarea>
+                <p class="font-bold">Enviado por:</p>
+                <input type="text" pInputText value="cgrenancontato@gmail.com">
+            </p-card>
+
+        </p-card>
+    </p-card>
+
+    <p-card class="col-12 xl:col-6" header="Dados" subheader="Informações coletadas dos usuários">
+        <div class="grid">
+            <p-card header="Elogios" class="col-12 xl:col-6" styleClass="bg-green text-white">
+                <div class="col-12 flex justify-content-end">
+                    <h1 class="m-0 p-0">124</h1>
+                </div>
+            </p-card>
+            <p-card header="Ideias" class="col-12 xl:col-6" styleClass="bg-blue text-white">
+                <div class="col-12 flex justify-content-end">
+                    <h1 class="m-0 p-0">100</h1>
+                </div>
+            </p-card>
+            <p-card header="Problemas" class="col-12" styleClass="bg-red text-white">
+                <div class="col-12 flex justify-content-end">
+                    <h1 class="m-0 p-0">4</h1>
+                </div>
+            </p-card>
+        </div>
+    </p-card>
+
+</div>

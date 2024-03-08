@@ -6,8 +6,8 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
-import { Feedback } from '../models/Feedback.model';
-import { WidgetService } from './services/widget.service';
+import { Feedback } from '../../models/Feedback.model';
+import { WidgetService } from '../../services/widget.service';
 
 @Component({
   selector: 'app-widget',
