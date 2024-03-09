@@ -1,5 +1,4 @@
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
@@ -18,8 +17,7 @@ import { WidgetService } from '../../services/widget.service';
     ReactiveFormsModule,
     CardModule,
     ButtonModule,
-    InputTextareaModule,
-    HttpClientModule
+    InputTextareaModule  
   ],
   providers: [
     WidgetService
@@ -31,6 +29,7 @@ export class WidgetComponent implements OnInit {
 
   public isSelected: boolean = false;
   public sended: boolean = false;
+  public selectedTypeText: string = '';
   public selectedType: string = '';
 
   public formulario = new FormGroup({
@@ -63,13 +62,16 @@ export class WidgetComponent implements OnInit {
 
     switch(type) {
       case 'elogio':
-        this.selectedType = 'Faça um elogio';
+        this.selectedTypeText = 'Faça um elogio';
+        this.selectedType = 'Elogio';
         break;
       case 'ideia':
-        this.selectedType = 'Compartilhe uma ideia';
+        this.selectedTypeText = 'Compartilhe uma ideia';
+        this.selectedType = 'Ideia';
         break;
       case 'problema':
-        this.selectedType = 'Reporte um problema'
+        this.selectedTypeText = 'Reporte um problema'
+        this.selectedType = 'Problema'
         break;
     }
   }
@@ -80,6 +82,7 @@ export class WidgetComponent implements OnInit {
     feedback.userId = this.id;
     feedback.description = this.formulario.value.description ?? '';
     feedback.sender = 'cgrenancontato@hotmail.com';
+    feedback.status = this.selectedType;
     
     this.service.post(feedback).subscribe({
       next: (res) => {

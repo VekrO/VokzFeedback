@@ -7,6 +7,7 @@
             <div class="flex align-items-center justify-content-end">
                 <button pButton pRipple icon="pi pi-bell" class="p-button-text p-button-lg p-button-secondary"></button>
                 <button pButton pRipple icon="pi pi-comment" class="p-button-text p-button-lg p-button-secondary"></button>
+                <button pButton pRipple icon="pi pi-sign-out" class="p-button-text p-button-lg p-button-secondary" (click)="signout()"></button>
             </div>
 
             <p-avatar image="assets/profile.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
@@ -25,20 +26,19 @@
                 </form>
             </ng-template>
 
-            <p-card class="col-12 flex flex-column">
-                <p-tag severity="info" icon="pi pi-info-circle" value="Ideia"></p-tag>
-                <p class="font-bold">Feedback:</p>
-                <textarea pInputTextarea [autoResize]="true" value="Primeiro teste do Vokz Feedback!"></textarea>
-                <p class="font-bold">Enviado por:</p>
-                <input type="text" pInputText value="cgrenancontato@gmail.com">
-            </p-card>
-            <p-card class="col-12 flex flex-column">
-                <p-tag severity="info" icon="pi pi-info-circle" value="Ideia"></p-tag>
-                <p class="font-bold">Feedback:</p>
-                <textarea pInputTextarea [autoResize]="true" value="Primeiro teste do Vokz Feedback!"></textarea>
-                <p class="font-bold">Enviado por:</p>
-                <input type="text" pInputText value="cgrenancontato@gmail.com">
-            </p-card>
+            @for (item of feedbacks$ | async; track $index) {
+                <p-card class="col-12 flex flex-column">
+                    <div class="flex align-items-center justify-content-between">
+                        <p-tag severity="{{ item.status == 'Elogio' ? 'success' : item.status == 'Ideia' ? 'info' : 'error' }}" icon="pi pi-info-circle" [value]="item.status"></p-tag>
+                        <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-danger" (click)="deleteFeedback(item)"></button>
+                    </div>
+                    <p class="font-bold">Feedback:</p>
+                    <textarea pInputTextarea [autoResize]="true" [value]="item.description"></textarea>
+                    <p class="font-bold">Enviado por:</p>
+                    <input type="text" pInputText [value]="item.sender">
+                </p-card>
+            }
+
 
         </p-card>
     </p-card>

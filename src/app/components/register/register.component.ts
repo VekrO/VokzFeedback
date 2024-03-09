@@ -1,4 +1,3 @@
-import { HttpClientModule } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ButtonModule } from 'primeng/button';
@@ -15,7 +14,6 @@ import { AuthenticationService } from '../../services/authentication.service';
     ReactiveFormsModule,
     InputTextModule,
     CardModule,
-    HttpClientModule,
     ButtonModule
   ],
   providers: [

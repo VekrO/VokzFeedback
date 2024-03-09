@@ -1,10 +1,11 @@
-import { HttpClientModule } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import { Register } from '../../models/Register.model';
+import { Login } from '../../models/Login.model';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
@@ -15,7 +16,6 @@ import { AuthenticationService } from '../../services/authentication.service';
     ReactiveFormsModule,
     InputTextModule,
     CardModule,
-    HttpClientModule,
     ButtonModule
   ],
   providers: [
@@ -26,7 +26,11 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class LoginComponent {
 
-  constructor(private authenticationService: AuthenticationService) {}
+  private authenticationService: AuthenticationService = inject(AuthenticationService);
+  private messageService: MessageService = inject(MessageService);
+  private router: Router = inject(Router);
+
+  constructor() {}
 
   public formulario = new FormGroup({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -35,13 +39,20 @@ export class LoginComponent {
 
   submit() {
     
-    const data: Register = new Register();
+    const data: Login = new Login();
+
     data.email = this.formulario.value.email ?? '';
     data.password = this.formulario.value.password ?? '';
+
     this.authenticationService.login(data).subscribe({
       next: (res) => {
-        console.log('resposta do login: ', res);
         this.authenticationService.setToken(res.token);
+        this.router.navigate(['/dashboard']);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'SUCESSO!',
+          detail: 'Login realizado com sucesso!'
+        });
       },
       error: (err) => {
         console.log('erro no login: ', err);
