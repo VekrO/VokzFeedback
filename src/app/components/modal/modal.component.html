@@ -1,0 +1,7 @@
+<div class="modal-container" [style]="{width: width, height: height}">
+    <h2 class="modal-header">{{ title }}</h2>
+    <p class="mb-5">{{ message }}</p>
+    <ng-content></ng-content>
+</div>
+
+<div class="modal-backdrop" (click)="close()"></div>

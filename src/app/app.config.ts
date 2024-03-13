@@ -5,6 +5,7 @@ import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { AuthenticationService } from './services/authentication.service';
+import { ModalConfigRef } from './services/modalConfigRef.service';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -12,5 +13,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(),
     AuthenticationService,
+    ModalConfigRef
   ]
 };

@@ -1,5 +1,6 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
+import { Router } from "@angular/router";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import { Observable } from "rxjs";
 import { Login } from "../models/Login.model";
@@ -9,6 +10,7 @@ import { Register } from "../models/Register.model";
 export class AuthenticationService {
 
     private api: string = 'https://localhost:7000/api/v1/authentication';
+    private router: Router = inject(Router);
     private http = inject(HttpClient);
 
     constructor() {} 
@@ -65,6 +67,11 @@ export class AuthenticationService {
 
         return isValid;
 
+    }
+
+    signout() {
+        this.removeToken();
+        this.router.navigate(['/login']);
     }
 
 }
