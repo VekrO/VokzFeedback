@@ -1,64 +1,11 @@
-<div class="grid p-fluid h-screen">
+<div class="flex h-screen">
 
-    <p-card class="col-12">
-
-        <div class="flex justify-content-end align-items-center gap-3">
-
-            <div class="flex align-items-center justify-content-end">
-                <button pButton pRipple icon="pi pi-bell" class="p-button-text p-button-lg p-button-secondary"></button>
-                <button pButton pRipple icon="pi pi-comment"
-                    class="p-button-text p-button-lg p-button-secondary"></button>
-                <button pButton pRipple icon="pi pi-sign-out" class="p-button-text p-button-lg p-button-secondary"
-                    (click)="signout()"></button>
-            </div>
-
-            <p-avatar image="assets/profile.png" styleClass="mr-2" size="xlarge" shape="circle"></p-avatar>
-
-        </div>
-
-    </p-card>
-
-    <!-- <p-card class="col-12 xl:col-6" header="Dados" subheader="Informações coletadas dos usuários">
-        <div class="grid">
-            <p-card header="Elogios" class="col-12 xl:col-6" styleClass="bg-green text-white">
-                <div class="col-12 flex justify-content-end">
-                    <h1 class="m-0 p-0">124</h1>
-                </div>
-            </p-card>
-            <p-card header="Ideias" class="col-12 xl:col-6" styleClass="bg-blue text-white">
-                <div class="col-12 flex justify-content-end">
-                    <h1 class="m-0 p-0">100</h1>
-                </div>
-            </p-card>
-            <p-card header="Problemas" class="col-12" styleClass="bg-red text-white">
-                <div class="col-12 flex justify-content-end">
-                    <h1 class="m-0 p-0">4</h1>
-                </div>
-            </p-card>
-        </div>
-    </p-card> -->
-
-    <div class="col-12">
-        <ng-template pTemplate="header">
-            <form [formGroup]="formulario" class="col-12">
-                <p-dropdown [options]="filters" formControlName="filtering" (onChange)="getFeedbackByStatus();"
-                    placeholder="Filtrar por"></p-dropdown>
-            </form>
-        </ng-template>
-        @for (item of feedbacks$ | async; track $index) {
-        <p-card class="flex flex-column">
-            <div class="flex align-items-center justify-content-between">
-                <p-tag severity="{{ item.status == 'Elogio' ? 'success' : item.status == 'Ideia' ? 'info' : 'error' }}"
-                    icon="pi pi-info-circle" [value]="item.status"></p-tag>
-                <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-danger"
-                    (click)="deleteFeedback(item)"></button>
-            </div>
-            <p class="font-bold">Feedback:</p>
-            <textarea pInputTextarea [autoResize]="true" [value]="item.description"></textarea>
-            <p class="font-bold">Enviado por:</p>
-            <input type="text" pInputText [value]="item.sender">
-        </p-card>
-        }
+    <div style="min-width: 300px;" class="col-3 bg-primary-50 sticky top-0 left-0 h-full">
+        <app-sidebar></app-sidebar>
     </div>
 
+    <div class="overflow-y-auto col-9">
+        <router-outlet></router-outlet>
+    </div>
+    
 </div>

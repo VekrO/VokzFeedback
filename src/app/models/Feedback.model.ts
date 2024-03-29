@@ -5,5 +5,6 @@ export class Feedback {
     public userId: string = '';
     public sender: string = '';
     public status: string = '';
+    public dateHour!: Date | string;
 
 }

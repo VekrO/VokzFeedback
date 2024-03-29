@@ -1,0 +1,22 @@
+
+<form [formGroup]="formulario" class="col-12">
+    <p-dropdown styleClass="w-full" [options]="filters" formControlName="filtering" (onChange)="getFeedbackByStatus();"
+        placeholder="Filtrar por"></p-dropdown>
+</form>
+
+<div class="flex flex-column gap-2">
+    @for (item of feedbacks$ | async; track $index) {
+    <p-card class="col-12">
+        <div class="flex align-items-center justify-content-between">
+            <p-tag severity="{{ item.status == 'Elogio' ? 'success' : item.status == 'Ideia' ? 'info' : 'danger' }}"
+                icon="pi pi-info-circle" [value]="item.status"></p-tag>
+            <button pButton pRipple type="button" icon="pi pi-trash" class="p-button-danger p-button-sm"
+                (click)="deleteFeedback(item)"></button>
+        </div>
+        <p class="font-bold">Feedback:</p>
+        <textarea class="w-full" pInputTextarea [autoResize]="true" [value]="item.description"></textarea>
+        <p class="font-bold">Enviado por:</p>
+        <input class="w-full" type="text" pInputText [value]="item.sender">
+    </p-card>
+    }
+</div>

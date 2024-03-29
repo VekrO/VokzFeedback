@@ -1,4 +1,4 @@
-<p-card *ngIf="!isSelected && !sended" header="Compartilhe sua experiência">
+<p-card *ngIf="!isSelected && !sended" header="Compartilhe sua experiência" styleClass="shadow-none">
     <div class="flex flex-column gap-2">
         <p-button (onClick)="onSelect('elogio')" label="Elogiar" severity="success" icon="pi pi-thumbs-up" styleClass="w-full text-center p-button-raised"></p-button>
         <p-button (onClick)="onSelect('ideia')" label="Dar uma ideia" severity="info" icon="pi pi-info-circle" styleClass="w-full text-center p-button-raised"></p-button>
@@ -6,7 +6,7 @@
     </div>
 </p-card>
 
-<p-card *ngIf="isSelected && !sended" header="{{ selectedType }}">
+<p-card *ngIf="isSelected && !sended" header="{{ selectedType }}" styleClass="shadow-none">
 
     <form [formGroup]="formulario">
         <textarea rows="5" cols="30" pInputTextarea formControlName="description" class="w-full"></textarea>
@@ -21,7 +21,7 @@
 
 </p-card>
 
-<p-card *ngIf="sended" header="Obrigado!">
+<p-card *ngIf="sended" header="Obrigado!" styleClass="shadow-none">
     <p>Obrigado por compartilhar sua opinião conosco! Valorizamos muito sua contribuição.</p>
     <p-button (onClick)="onSelect('voltar')" label="Voltar" severity="secondary" icon="pi pi-arrow-circle-left" styleClass="p-button-raised"></p-button>
 </p-card>

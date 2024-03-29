@@ -1,11 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Params } from '@angular/router';
+import moment from 'moment';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextareaModule } from 'primeng/inputtextarea';
 import { Feedback } from '../../models/Feedback.model';
+import { MomentService } from '../../services/moment.service';
 import { WidgetService } from '../../services/widget.service';
 
 @Component({
@@ -20,12 +22,17 @@ import { WidgetService } from '../../services/widget.service';
     InputTextareaModule  
   ],
   providers: [
-    WidgetService
+    WidgetService,
+    MomentService
   ],
   templateUrl: './widget.component.html',
   styleUrl: './widget.component.scss'
 })
 export class WidgetComponent implements OnInit {
+
+  private route: ActivatedRoute = inject(ActivatedRoute);
+  private momentService: MomentService = inject(MomentService);
+  private service: WidgetService = inject(WidgetService);
 
   public isSelected: boolean = false;
   public sended: boolean = false;
@@ -37,16 +44,23 @@ export class WidgetComponent implements OnInit {
   });
 
   private id: string = '';
-
-  constructor(private route: ActivatedRoute, private service: WidgetService) {}
+  private sender: string = '';
 
   ngOnInit(): void {
+    console.log('WIDGET TO DATE: ', moment().toDate())
     this.route.queryParams.subscribe({
       next: (res: Params) => {
+
         if(res && res['id']) {
           this.id =  res['id'];
-          console.log('id: ', this.id);
         }
+
+        if(res && res['sender']) {
+          this.sender = res['sender']; 
+        } else {
+          this.sender = 'Não informado';
+        }
+
       }
     })
   }
@@ -81,17 +95,16 @@ export class WidgetComponent implements OnInit {
     const feedback: Feedback = new Feedback();
     feedback.userId = this.id;
     feedback.description = this.formulario.value.description ?? '';
-    feedback.sender = 'cgrenancontato@hotmail.com';
+    feedback.sender = this.sender;
     feedback.status = this.selectedType;
-    
+    feedback.dateHour = this.momentService.getDate();
+
     this.service.post(feedback).subscribe({
-      next: (res) => {
-        console.log('resposta do submit: ', res);
+      next: () => {
         this.isSelected = false;
         this.sended = true;
       },
       error: (err) => {
-        console.log('erro no envio do submit: ', err);
         this.sended = false;
       }
     });

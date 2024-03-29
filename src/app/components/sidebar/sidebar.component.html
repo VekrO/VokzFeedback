@@ -1,0 +1,16 @@
+<div class="col-12 text-center flex flex-column justify-content-between h-full">
+
+    <div>
+        <h2>Vokz Feedback</h2>
+    </div>
+
+    <div class="flex flex-column gap-2">
+        <a routerLink="dashboard" pButton pRipple icon="pi pi-comment" class="p-button-raised w-full text-white fix-label no-underline" label="Feedbacks"></a>
+        <a routerLink="profile" pButton pRipple icon="pi pi-cog" class="p-button-help p-button-raised w-full text-white fix-label no-underline" label="Perfil"></a>
+    </div>
+    
+    <div>
+        <a (click)="signout()" pButton pRipple icon="pi pi-sign-out" class="p-button-raised p-button-secondary w-full text-white fix-label no-underline" label="Sair"></a>
+    </div>
+
+</div>
