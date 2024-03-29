@@ -1,12 +1,13 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable, inject } from "@angular/core";
 import { Observable } from "rxjs";
+import { APP } from "../../environments/environment";
 import { Feedback } from "../models/Feedback.model";
 
 @Injectable()
 export class FeedbackService {
     
-    private api: string = 'https://localhost:7000/api/v1/feedback';
+    private api: string = APP.api + '/feedback';
     private http: HttpClient = inject(HttpClient);
 
     get(id: string, idUsuario: string): Observable<Feedback[]> {

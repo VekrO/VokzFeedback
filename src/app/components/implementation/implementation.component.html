@@ -1,0 +1,40 @@
+<p-card header="Implementação" subheader="Configurações iniciais">
+
+    <div class="flex flex-column">
+        
+        <p>Para incorporar o widget de feedback em seu site, primeiro adicione esta tag de script ao HTML:</p>
+        
+        <code class="code-container">
+            <span class="code tag">
+                <span class="code tag">
+                    <span class="code punctuation">&lt;</span>script
+                </span> 
+                <span class="code attr-name"> defer</span> 
+                <span class="code attr-name"> src</span>
+                <span class="code attr-value">
+                    <span class="code punctuation attr-equals">=</span>
+                    <span class="code punctuation">"</span>https://vokzfeedback.app/main.js?id={{ userData.id }}<span class="code punctuation">"</span>
+                </span>
+                <span class="code punctuation">&gt;</span>
+            </span>
+            <span class="code plain-text"></span>
+            <span class="code tag">
+                <span class="code tag"><span class="code punctuation">&lt;/</span>script</span><span class="code punctuation">&gt;</span>
+            </span>
+        </code>
+
+        <p>Para adicionar o botão padrão ao seu site, adicione o seguinte código HTML:</p>
+        
+        <code class="code-container"><span class="code tag"><span class="code tag"><span class="code punctuation">&lt;</span>button</span> <span class="code attr-name"> data-vokz</span><span class="code punctuation">&gt;</span></span><span class="code plain-text"><br>&nbsp;&nbsp;Feedback<br></span><span class="code tag"><span class="code tag"><span class="code punctuation">&lt;/</span>button</span><span class="code punctuation">&gt;</span></span></code>
+
+        <p>Se quiser identificar qual usuário enviou feedback, você pode opcionalmente adicionar o atributo <span class="attr-name">data-user</span> ao botão e passe o email ou id do usuário atualmente autenticado.</p>
+        
+        <code class="code-container"><span class="code tag"><span class="code tag"><span class="code punctuation">&lt;</span>button</span> <span class="code attr-name"> data-vokz </span> <span class="code attr-name">data-user</span><span class="code attr-value"><span class="code punctuation attr-equals">=</span><span class="code punctuation">"</span>idOuEmail<span class="code punctuation">"</span></span><span class="code punctuation">&gt;</span></span><span class="code plain-text"><br>&nbsp;&nbsp;Feedback<br></span><span class="code tag"><span class="code tag"><span class="code punctuation">&lt;/</span>button</span><span class="code punctuation">&gt;</span></span></code>
+        
+        <p>É isso, agora você está com o Vokz Feedback configurado.</p>
+
+    </div>
+
+</p-card>
+
+<!-- <script defer src="https://app.feedefy.com/embed.js?id=24b3c28e-ccbd-4994-8b03-f214e081ffe8"></script> -->

@@ -3,13 +3,14 @@ import { Injectable, inject } from "@angular/core";
 import { Router } from "@angular/router";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import { Observable } from "rxjs";
+import { APP } from "../../environments/environment";
 import { Login } from "../models/Login.model";
 import { Register } from "../models/Register.model";
 
 @Injectable()
 export class AuthenticationService {
 
-    private api: string = 'https://localhost:7000/api/v1/authentication';
+    private api: string = APP.api + '/authentication';
     private router: Router = inject(Router);
     private http = inject(HttpClient);
 
