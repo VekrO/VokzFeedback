@@ -10,7 +10,7 @@ import { AuthGuard, AuthenticatedGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     {
-        path: '', redirectTo: 'widget', pathMatch: 'full'
+        path: '', redirectTo: 'dashboard', pathMatch: 'full'
     },
     {
         path: 'widget', component: WidgetComponent
