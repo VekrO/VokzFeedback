@@ -1,4 +1,4 @@
 export const APP = {
     production: true,
-    api: 'https://vokzfinancy.somee.com/api/v1',
+    api: 'https://vokzfeedback.somee.com/api/v1',
 }
