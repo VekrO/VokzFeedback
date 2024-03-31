@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
@@ -24,7 +26,9 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class RegisterComponent {
 
-  constructor(private authenticationService: AuthenticationService) {}
+  private authenticationService: AuthenticationService = inject(AuthenticationService);
+  private messageService: MessageService = inject(MessageService);
+  private router: Router = inject(Router);
 
   public formulario = new FormGroup({
     name: new FormControl('', [Validators.required]),
@@ -39,11 +43,20 @@ export class RegisterComponent {
     data.name = this.formulario.value.name ?? '';
     data.password = this.formulario.value.password ?? '';
     this.authenticationService.register(data).subscribe({
-      next: (res) => {
-        console.log('resposta do registro: ', res);
+      next: () => {
+        this.router.navigate(['/login']);
+        this.messageService.add({
+          severity: 'success',
+          summary: 'SUCESSO!',
+          detail: 'Contra criada com sucesso!'
+        });
       },
       error: (err) => {
-        console.log('erro no registro: ', err);
+        this.messageService.add({
+          severity: 'error',
+          summary: 'ERRO!',
+          detail: err.error
+        });
       }
     });
 

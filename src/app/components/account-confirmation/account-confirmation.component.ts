@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
-import { Router, RouterModule } from '@angular/router';
+import { ActivatedRoute, Params, Router, RouterModule } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
 import { InputTextModule } from 'primeng/inputtext';
-import { Login } from '../../models/Login.model';
+import { AccountConfirmation } from '../../models/AccountConfirmation.model';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  selector: 'app-login',
+  selector: 'app-account-confirmation',
   standalone: true,
   imports: [
     CommonModule,
@@ -24,39 +24,47 @@ import { AuthenticationService } from '../../services/authentication.service';
   providers: [
     AuthenticationService
   ],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  template: '',
 })
-export class LoginComponent {
+export class AccountConfirmationComponent implements OnInit {
 
   private authenticationService: AuthenticationService = inject(AuthenticationService);
   private messageService: MessageService = inject(MessageService);
   private router: Router = inject(Router);
+  private route: ActivatedRoute = inject(ActivatedRoute);
 
-  constructor() {}
+  constructor() { }
 
   public formulario = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.minLength(3)])
+    emailConfirmationCode: new FormControl('', [Validators.required, Validators.minLength(6)])
   });
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe({
+      next: (res: Params) => {
+        if(res && res['code']) {
+          this.formulario.controls['emailConfirmationCode'].setValue(res['code']);
+          this.submit();
+        } else {
+          this.router.navigate(['/login']);
+        }
+      }
+    });
+  }
+
   submit() {
-    
-    const data: Login = new Login();
 
-    data.email = this.formulario.value.email ?? '';
-    data.password = this.formulario.value.password ?? '';
+    const data: AccountConfirmation = new AccountConfirmation();
 
-    this.messageService.clear();
+    data.emailConfirmationCode = this.formulario.value.emailConfirmationCode ?? '';
 
-    this.authenticationService.login(data).subscribe({
-      next: (res) => {
-        this.authenticationService.setToken(res.token);
-        this.router.navigate(['/dashboard']);
+    this.authenticationService.accountConfirmation(data).subscribe({
+      next: () => {
+        this.router.navigate(['/login']);
         this.messageService.add({
           severity: 'success',
           summary: 'SUCESSO!',
-          detail: 'Login realizado com sucesso!'
+          detail: 'Conta confirmada com sucesso!'
         });
       },
       error: (err) => {

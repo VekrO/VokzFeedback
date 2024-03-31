@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { AccountConfirmationComponent } from './components/account-confirmation/account-confirmation.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { FeedbackListComponent } from './components/feedback-list/feedback-list.component';
 import { ImplementationComponent } from './components/implementation/implementation.component';
@@ -20,6 +21,9 @@ export const routes: Routes = [
     },
     {
         path: 'login', component: LoginComponent, canActivate: [AuthenticatedGuard]
+    },
+    {
+        path: 'account-confirmation', component: AccountConfirmationComponent, canActivate: [AuthenticatedGuard],
     },
     {
         path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard],

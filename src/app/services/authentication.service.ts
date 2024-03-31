@@ -4,6 +4,7 @@ import { Router } from "@angular/router";
 import { JwtPayload, jwtDecode } from "jwt-decode";
 import { Observable } from "rxjs";
 import { APP } from "../../environments/environment";
+import { AccountConfirmation } from "../models/AccountConfirmation.model";
 import { Login } from "../models/Login.model";
 import { Register } from "../models/Register.model";
 
@@ -22,6 +23,10 @@ export class AuthenticationService {
 
     register(data: Register): Observable<any> {
         return this.http.post<any>(this.api + '/register', data);
+    }
+
+    accountConfirmation(data: AccountConfirmation): Observable<any> {
+        return this.http.post(this.api + '/account-confirmation', data);
     }
 
     getUserId(): string {

@@ -2,17 +2,17 @@
     <p-card header="Login">
 
         <div class="col-12">
-            <input type="text" pInputText formControlName="email" placeholder="E-mail" type="email"
-                class="p-inputtext-sm">
+            <input pInputText formControlName="email" placeholder="E-mail" type="email"
+                class="p-inputtext-sm w-full">
         </div>
 
         <div class="col-12">
-            <input type="text" pInputText formControlName="password" placeholder="Senha" type="password"
-                class="p-inputtext-sm">
+            <input pInputText formControlName="password" placeholder="Senha" type="password"
+                class="p-inputtext-sm w-full">
         </div>
 
         <div class="col-12">
-            <button pButton pRipple type="submit" label="Confirmar"
+            <button class="w-full" pButton pRipple type="submit" label="Confirmar"
                 [disabled]="formulario.invalid"></button>
         </div>
         
